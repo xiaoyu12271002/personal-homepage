@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个性化主页</title>
+    <!-- 引入外部CSS样式文件 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景图片容器 - 固定定位，作为页面背景 -->
+    <div class="background-container"></div>
+    
+    <!-- 页面主要内容容器 -->
+    <div class="content">
+        <!-- 时间显示区域 - 显示当前时间 -->
+        <div class="time-display" id="currentTime">00:00</div>
+        
+        <!-- 问候语区域 - 根据时间段显示不同的问候语 -->
+        <div class="greeting" id="greeting">早上好</div>
+        
+        <!-- 搜索框容器 - 包含搜索输入框和搜索按钮 -->
+        <div class="search-container">
+            <!-- 搜索输入框 - 用户可以在此输入搜索内容 -->
+            <input type="text" class="search-box" placeholder="搜索...">
+            <!-- 搜索按钮 - 点击执行搜索功能 -->
+            <button class="search-btn">⌕</button>
+        </div>
+        
+        <!-- 应用图标网格 - 8个应用图标以网格形式排列 -->
+ <div class="app-grid">
+    <button class="app-icon" data-name="电话" data-default="tel:">📱</button>
+    <button class="app-icon" data-name="邮件" data-default="mailto:test@example.com">📧</button>
+    <button class="app-icon" data-name="相机" data-default="camera://">📷</button>
+    <button class="app-icon" data-name="音乐" data-default="https://music.163.com">🎵</button>
+    <button class="app-icon" data-name="地图" data-default="https://maps.google.com">🗺️</button>
+    <button class="app-icon" data-name="设置" data-default="settings://">⚙️</button>
+    <button class="app-icon" data-name="笔记" data-default="https://www.evernote.com">📝</button>
+    <button class="app-icon" data-name="浏览器" data-default="https://www.google.com">🌐</button>
+ </div>
+ </div>
+
+    <!-- 引入外部JavaScript文件 -->
+    <script src="script.js"></script>
+    
+    <!-- 自定义链接的模态框 -->
+<div id="customizeModal" class="modal">
+    <div class="modal-content">
+        <h3>自定义应用链接</h3>
+        <div class="form-group">
+            <label for="appName">应用名称:</label>
+            <input type="text" id="appName" readonly>
+        </div>
+        <div class="form-group">
+            <label for="appUrl">链接地址:</label>
+            <input type="text" id="appUrl" placeholder="请输入网址 (如: https://example.com)">
+        </div>
+        <div class="modal-buttons">
+            <button id="saveUrl" class="btn-primary">保存</button>
+            <button id="cancelUrl" class="btn-secondary">取消</button>
+            <button id="resetUrl" class="btn-reset">恢复默认</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

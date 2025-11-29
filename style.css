@@ -1,0 +1,409 @@
+/* === CSS重置 - 清除所有元素的默认样式，确保跨浏览器一致性 === */
+* {
+    margin: 0;                           /* 清除浏览器默认的外边距 */
+    padding: 0;                          /* 清除浏览器默认的内边距 */
+    box-sizing: border-box;              /* 设置盒模型：元素的宽度和高度包含padding和border */
+}
+
+/* === 全局按钮重置 - 移除所有移动端点击时的方形背景动画 === */
+button {
+    -webkit-tap-highlight-color: transparent; /* 移除iOS Safari点击时的灰色高亮效果 */
+    outline: none;                       /* 移除焦点时的轮廓线 */
+    -webkit-user-select: none;           /* 防止在iOS Safari中选择文字 */
+    user-select: none;                   /* 防止在其他浏览器中选择文字 */
+    border-style: solid;                 /* 确保边框样式一致，避免浏览器差异 */
+    cursor: pointer;                     /* 鼠标悬停时显示手型指针，表明可点击 */
+}
+
+/* === 移除Firefox浏览器中按钮的内部边框和内边距 === */
+button::-moz-focus-inner {
+    border: 0;                           /* 移除Firefox按钮的内部边框 */
+    padding: 0;                          /* 移除Firefox按钮的内部内边距 */
+}
+
+/* === 确保所有按钮状态（悬停、激活、焦点）都没有默认效果 === */
+button:hover,
+button:active,
+button:focus {
+    outline: none;                       /* 移除所有状态下的轮廓线 */
+    -webkit-tap-highlight-color: transparent; /* 确保点击时没有高亮效果 */
+}
+
+/* === 页面基础样式 === */
+body, html {
+    height: 100%;                        /* 设置body和html高度为100%，占满整个视口 */
+    overflow: hidden;                    /* 隐藏滚动条，创造全屏无滚动的视觉效果 */
+}
+
+/* === 背景容器样式 - 用于显示背景图片 === */
+.background-container {
+    position: fixed;                     /* 固定定位，不随页面内容滚动 */
+    top: 0;                             /* 距离顶部0像素 */
+    left: 0;                            /* 距离左边0像素 */
+    width: 100%;                        /* 宽度100%铺满整个屏幕 */
+    height: 100%;                       /* 高度100%铺满整个屏幕 */
+    background-image: url('Beijin.jpeg'); /* 设置背景图片的路径 */
+    background-size: cover;             /* 背景图片覆盖整个容器，可能被裁剪但不会留白 */
+    background-position: center;        /* 背景图片在容器中居中显示 */
+    background-repeat: no-repeat;       /* 背景图片不重复平铺 */
+    background-attachment: fixed;       /* 背景图片固定，不随页面内容滚动 */
+    z-index: -1;                        /* 层级-1，确保在内容下面显示 */
+}
+
+/* === 主要内容容器样式 - 包含所有可见的内容元素 === */
+.content {
+    position: relative;                  /* 相对定位，作为内部绝对定位元素的参考 */
+    z-index: 1;                         /* 层级1，确保在背景图片上面显示 */
+    height: 100vh;                      /* 高度为100%视口高度，占满整个屏幕 */
+    display: flex;                      /* 使用弹性布局 */
+    flex-direction: column;             /* 垂直方向排列子元素 */
+    justify-content: flex-start;        /* 子元素从容器顶部开始排列 */
+    align-items: center;                /* 子元素在容器中水平居中 */
+    color: white;                       /* 文字颜色为白色 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 文字阴影：向右偏移2px，向下偏移2px，模糊4px，黑色70%透明度 */
+    text-align: center;                 /* 文字水平居中 */
+    padding: 20px;                      /* 容器四周20像素的内边距 */
+    padding-top: 80px;                  /* 容器顶部80像素的内边距，让内容往下移避免被遮挡 */
+}
+
+/* === 时间显示样式 - 显示当前时间的大字体 === */
+.time-display {
+    font-size: 4em;                     /* 字体大小为4em，相对于父元素字体大小的4倍 */
+    font-weight: bold;                  /* 字体加粗，更加醒目 */
+    margin-bottom: 5px;                 /* 底部外边距5像素，减少与问候语的间距 */
+    font-family: 'Orbitron', 'Courier New', monospace; /* 字体栈：首选Orbitron科技字体，备用Courier New等宽字体，最后系统等宽字体 */
+    letter-spacing: 2px;                /* 字母间距2像素，让数字之间更加清晰易读 */
+}
+
+/* === 问候语样式 - 根据时间段显示不同的问候语 === */
+.greeting {
+    font-size: 2em;                     /* 字体大小为2em，相对于父元素字体大小的2倍 */
+    margin-bottom: 30px;                /* 底部外边距30像素，与搜索框保持适当距离 */
+    margin-top: -5px;                   /* 顶部外边距-5像素（负值），让问候语向上移动靠近时间显示 */
+    font-family: system-ui;             /* 使用系统默认UI字体，会自动跟随用户系统字体设置变化 */
+    font-weight: normal;                /* 正常字重，不使用加粗效果 */
+    -webkit-font-smoothing: antialiased; /* 在Webkit浏览器（Chrome、Safari）中启用字体抗锯齿渲染 */
+    -moz-osx-font-smoothing: grayscale; /* 在Firefox浏览器中启用字体灰度抗锯齿 */
+}
+
+/* === 搜索容器样式 - 包含搜索框和搜索按钮的容器 === */
+.search-container {
+    position: relative;                  /* 相对定位，作为内部绝对定位元素的参考 */
+    max-width: 400px;                   /* 最大宽度400像素，避免在大屏幕上过宽 */
+    width: 100%;                        /* 宽度100%自适应父容器 */
+    margin-bottom: 40px;                /* 底部外边距40像素，与下方内容保持距离 */
+}
+
+/* === 搜索框输入区域样式 - 半透明毛玻璃效果 === */
+.search-box {
+    width: 100%;                        /* 宽度100%填满父容器 */
+    padding: 15px 60px 15px 20px;       /* 内边距：上下15px，左边20px，右边60px（为搜索按钮留空间） */
+    font-size: 1.1em;                   /* 字体大小1.1em，比正常文字稍大 */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* 边框：2像素宽，半透明白色50%透明度 */
+    border-radius: 25px;                /* 圆角25像素，创造椭圆形输入框 */
+    background: rgba(255, 255, 255, 0.15); /* 背景色：半透明白色15%透明度 */
+    backdrop-filter: blur(10px);        /* 毛玻璃效果：背景模糊10像素 */
+    color: white;                       /* 输入文字颜色为白色 */
+    outline: none;                      /* 移除默认的焦点轮廓线 */
+    transition: all 0.3s ease;          /* 所有属性变化时有0.3秒的缓动过渡动画 */
+}
+
+/* === 搜索框占位符文字样式 === */
+.search-box::placeholder {
+    color: rgba(255, 255, 255, 0.7);    /* 占位符文字颜色：半透明白色70%透明度 */
+}
+
+/* === 搜索框获得焦点时的样式 - 用户点击或Tab聚焦时生效 === */
+.search-box:focus {
+    border-color: #00BFFF;              /* 边框颜色变为天蓝色 */
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5); /* 添加天蓝色发光阴影效果 */
+    background: rgba(255, 255, 255, 0.2); /* 背景稍亮，变为20%透明度 */
+}
+
+/* === 搜索按钮样式 - 位于搜索框内部的放大镜图标 === */
+.search-btn {
+    position: absolute;                  /* 绝对定位，相对于搜索容器定位 */
+    right: 5px;                         /* 距离右边5像素 */
+    top: 50%;                           /* 距离顶部50%，开始垂直居中定位 */
+    transform: translateY(-50%);        /* 通过变换向上移动自身高度的50%，实现完美垂直居中 */
+    padding: 10px 15px;                 /* 内边距：上下10px，左右15px */
+    background: none;                   /* 无背景色，完全透明 */
+    border: none;                       /* 无边框 */
+    border-radius: 20px;                /* 圆角20像素，创造圆形按钮效果 */
+    color: rgba(255, 255, 255, 0.8);    /* 图标颜色：半透明白色80%透明度 */
+    font-size: 1.4em;                   /* 图标字体大小1.4em，比正常文字大 */
+    cursor: pointer;                    /* 鼠标悬停时显示手型指针 */
+    transition: all 0.3s ease;          /* 所有属性变化时有0.3秒的缓动过渡动画 */
+    display: flex;                      /* 使用弹性布局 */
+    justify-content: center;            /* 内容水平居中 */
+    align-items: center;                /* 内容垂直居中 */
+}
+
+/* === 搜索按钮悬停效果 - 鼠标悬停在按钮上时生效 === */
+.search-btn:hover {
+    color: white;                       /* 图标颜色变为纯白色 */
+    transform: translateY(-50%) scale(1.1); /* 保持垂直居中并放大1.1倍 */
+}
+
+/* === 搜索按钮点击效果 - 用户点击按钮时生效 === */
+.search-btn:active {
+    color: #00BFFF;                     /* 图标颜色变为天蓝色 */
+    transform: translateY(-50%) scale(0.95); /* 保持垂直居中并缩小到0.95倍 */
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.8); /* 添加天蓝色发光阴影 */
+}
+
+/* === 搜索框聚焦时按钮样式 - 搜索框获得焦点时按钮也改变颜色 === */
+.search-box:focus + .search-btn {
+    color: #00BFFF;                     /* 图标颜色变为天蓝色，与搜索框焦点状态一致 */
+}
+
+/* === 应用图标网格容器 === */
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4列等宽网格 */
+    gap: 25px; /* 图标间距 */
+    max-width: 320px; /* 最大宽度 */
+    position: absolute; /* 绝对定位 */
+    bottom: 50px; /* 距离底部50px */
+    left: 50%; /* 水平居中开始 */
+    transform: translateX(-50%); /* 水平居中调整 */
+}
+
+/* === 单个应用图标样式 === */
+.app-icon {
+    width: 70px; /* 图标宽度 */
+    height: 70px; /* 图标高度 */
+    background: rgba(255, 255, 255, 0.15); /* 半透明背景 */
+    border-radius: 18px; /* 圆角 */
+    backdrop-filter: blur(15px); /* 毛玻璃效果 */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* 半透明边框 */
+    display: flex; /* 弹性布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    font-size: 28px; /* 图标大小 */
+    cursor: pointer; /* 手型指针 */
+    transition: all 0.4s ease; /* 过渡动画 */
+    position: relative; /* 相对定位 */
+}
+
+/* === 内发光效果 === */
+.app-icon::before {
+    content: ''; /* 伪元素内容 */
+    position: absolute; /* 绝对定位 */
+    top: 0; /* 顶部对齐 */
+    left: 0; /* 左侧对齐 */
+    right: 0; /* 右侧对齐 */
+    bottom: 0; /* 底部对齐 */
+    border-radius: 16px; /* 圆角（比主元素稍小） */
+    opacity: 0; /* 初始透明 */
+    transition: opacity 0.4s ease; /* 透明度过渡 */
+    pointer-events: none; /* 不阻挡点击事件 */
+}
+
+/* === 应用图标悬停效果 === */
+.app-icon:hover {
+    background: rgba(255, 255, 255, 0.2); /* 背景变亮 */
+    transform: scale(1.05); /* 轻微放大 */
+}
+
+/* === 应用图标点击效果 === */
+.app-icon:active {
+    transform: scale(0.85); /* 点击缩小 */
+    transition: all 0.1s ease; /* 快速响应 */
+}
+
+/* === 为不同图标设置内外发光效果 === */
+
+/* 手机图标 - 蓝色内外发光 */
+.app-icon:nth-child(1):hover {
+    border-color: #00BFFF; /* 边框变蓝色 */
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.6); /* 外发光 */
+}
+
+.app-icon:nth-child(1):hover::before {
+    opacity: 1; /* 显示内发光 */
+    box-shadow: inset 0 0 15px rgba(0, 191, 255, 0.6); /* 内发光效果 */
+}
+
+/* 邮件图标 - 粉色内外发光 */
+.app-icon:nth-child(2):hover {
+    border-color: #FF69B4;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+}
+
+.app-icon:nth-child(2):hover::before {
+    opacity: 1;
+    box-shadow: inset 0 0 15px rgba(255, 105, 180, 0.6);
+}
+
+/* 相机图标 - 绿色内外发光 */
+.app-icon:nth-child(3):hover {
+    border-color: #32CD32;
+    box-shadow: 0 0 20px rgba(50, 205, 50, 0.6);
+}
+
+.app-icon:nth-child(3):hover::before {
+    opacity: 1;
+    box-shadow: inset 0 0 15px rgba(50, 205, 50, 0.6);
+}
+
+/* 音乐图标 - 金色内外发光 */
+.app-icon:nth-child(4):hover {
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.app-icon:nth-child(4):hover::before {
+    opacity: 1;
+    box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+/* 地图图标 - 橙色内外发光 */
+.app-icon:nth-child(5):hover {
+    border-color: #FF8C00;
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+}
+
+.app-icon:nth-child(5):hover::before {
+    opacity: 1;
+    box-shadow: inset 0 0 15px rgba(255, 140, 0, 0.6);
+}
+
+/* 设置图标 - 紫色内外发光 */
+.app-icon:nth-child(6):hover {
+    border-color: #9370DB;
+    box-shadow: 0 0 20px rgba(147, 112, 219, 0.6);
+}
+
+.app-icon:nth-child(6):hover::before {
+    opacity: 1;
+    box-shadow: inset 0 0 15px rgba(147, 112, 219, 0.6);
+}
+
+/* 笔记图标 - 青色内外发光 */
+.app-icon:nth-child(7):hover {
+    border-color: #40E0D0;
+    box-shadow: 0 0 20px rgba(64, 224, 208, 0.6);
+}
+
+.app-icon:nth-child(7):hover::before {
+    opacity: 1;
+    box-shadow: inset 0 0 15px rgba(64, 224, 208, 0.6);
+}
+
+/* 浏览器图标 - 红色内外发光 */
+.app-icon:nth-child(8):hover {
+    border-color: #FF6347;
+    box-shadow: 0 0 20px rgba(255, 99, 71, 0.6);
+}
+
+.app-icon:nth-child(8):hover::before {
+    opacity: 1;
+    box-shadow: inset 0 0 15px rgba(255, 99, 71, 0.6);
+}
+
+/* === 自定义链接模态框样式 === */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* 半透明黑色背景 */
+    backdrop-filter: blur(5px); /* 背景模糊 */
+    z-index: 1000; /* 置于最顶层 */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.95); /* 半透明白色背景 */
+    backdrop-filter: blur(20px); /* 毛玻璃效果 */
+    border-radius: 20px; /* 圆角 */
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    color: #333; /* 深色文字 */
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-size: 1em;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #00BFFF;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+    outline: none;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.btn-primary, .btn-secondary, .btn-reset {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.btn-primary {
+    background: #00BFFF;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0099CC;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.btn-reset {
+    background: #FF6B6B;
+    color: white;
+}
+
+.btn-reset:hover {
+    background: #FF5252;
+}
