@@ -50,20 +50,22 @@ body, html {
     z-index: -1;                        /* 层级-1，确保在内容下面显示 */
 }
 
-/* === 主要内容容器样式 - 包含所有可见的内容元素 === */
+/* === 主要内容容器 - 确保正确的内容间距 === */
 .content {
-    position: relative;                  /* 相对定位，作为内部绝对定位元素的参考 */
-    z-index: 1;                         /* 层级1，确保在背景图片上面显示 */
-    height: 100vh;                      /* 高度为100%视口高度，占满整个屏幕 */
-    display: flex;                      /* 使用弹性布局 */
-    flex-direction: column;             /* 垂直方向排列子元素 */
-    justify-content: flex-start;        /* 子元素从容器顶部开始排列 */
-    align-items: center;                /* 子元素在容器中水平居中 */
-    color: white;                       /* 文字颜色为白色 */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 文字阴影：向右偏移2px，向下偏移2px，模糊4px，黑色70%透明度 */
-    text-align: center;                 /* 文字水平居中 */
-    padding: 20px;                      /* 容器四周20像素的内边距 */
-    padding-top: 80px;                  /* 容器顶部80像素的内边距，让内容往下移避免被遮挡 */
+    position: relative;                /* 相对定位，作为.app-grid的参考 */
+    z-index: 1;                        /* 基础层级 */
+    min-height: 100vh;                 /* 最小高度100%视口 */
+    display: flex;                     /* 弹性布局 */
+    flex-direction: column;            /* 垂直排列 */
+    justify-content: center;           /* 垂直居中主要内容 */
+    align-items: center;               /* 水平居中 */
+    color: white;                      /* 文字颜色 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 文字阴影 */
+    text-align: center;                /* 文字居中 */
+    padding: clamp(10px, 5vw, 20px);   /* 响应式内边距 */
+    padding-top: clamp(40px, 10vw, 80px); /* 顶部内边距，为时间显示留空间 */
+    box-sizing: border-box;            /* 盒模型：内边距包含在高度内 */
+
 }
 
 /* === 时间显示样式 - 显示当前时间的大字体 === */
@@ -157,16 +159,17 @@ body, html {
     color: #00BFFF;                     /* 图标颜色变为天蓝色，与搜索框焦点状态一致 */
 }
 
-/* === 应用图标网格容器 === */
+/* === 应用图标网格 - 智能定位方案 === */
 .app-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4列等宽网格 */
-    gap: 25px; /* 图标间距 */
-    max-width: 320px; /* 最大宽度 */
-    position: absolute; /* 绝对定位 */
-    bottom: 50px; /* 距离底部50px */
-    left: 50%; /* 水平居中开始 */
-    transform: translateX(-50%); /* 水平居中调整 */
+    display: grid;                      /* 网格布局 */
+    grid-template-columns: repeat(4, 1fr); /* 4列等宽 */
+    gap: clamp(10px, 3vw, 25px);       /* 响应式间距 */
+    max-width: min(90%, 320px);        /* 响应式最大宽度 */
+    position: absolute;                 /* 绝对定位，相对于.content容器 */
+    bottom: max(20px, 5vh);            /* 距离底部：取20px和5%视口高度中的较大值，确保不被遮挡 */
+    left: 50%;                         /* 水平居中开始 */
+    transform: translateX(-50%);       /* 水平居中调整 */
+    z-index: 10;                       /* 较高层级 */
 }
 
 /* === 单个应用图标样式 === */
