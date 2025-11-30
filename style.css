@@ -50,50 +50,47 @@ body, html {
     z-index: -1;                        /* 层级-1，确保在内容下面显示 */
 }
 
-/* === 主要内容容器 - 确保正确的内容间距 === */
+/* === /* === 主要内容容器 - 调整垂直位置 === */
 .content {
-    position: relative;                /* 相对定位，作为.app-grid的参考 */
-    z-index: 1;                        /* 基础层级 */
-    min-height: 100vh;                 /* 最小高度100%视口 */
-    display: flex;                     /* 弹性布局 */
-    flex-direction: column;            /* 垂直排列 */
-    justify-content: center;           /* 垂直居中主要内容 */
-    align-items: center;               /* 水平居中 */
-    color: white;                      /* 文字颜色 */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 文字阴影 */
-    text-align: center;                /* 文字居中 */
-    padding: clamp(10px, 5vw, 20px);   /* 响应式内边距 */
-    padding-top: clamp(40px, 10vw, 80px); /* 顶部内边距，为时间显示留空间 */
-    box-sizing: border-box;            /* 盒模型：内边距包含在高度内 */
-
+    position: relative;                 /* 相对定位 */
+    z-index: 1;                        /* 层级1，确保在背景之上 */
+    height: 100vh;                     /* 高度为100%视口高度，占满整个屏幕 */
+    display: flex;                     /* 使用弹性布局 */
+    flex-direction: column;            /* 垂直方向排列子元素 */
+    justify-content: flex-start;       /* 子元素从容器顶部开始排列（原为center） */
+    align-items: center;               /* 子元素水平居中 */
+    color: white;                      /* 文字颜色为白色 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 文字阴影效果 */
+    text-align: center;                /* 文字水平居中 */
+    padding: clamp(10px, 5vw, 20px);   /* 左右内边距：响应式，最小10px，按视口宽度5%计算，最大20px */
+    padding-top: 20vh;                 /* 顶部内边距：视口高度的20%，让内容整体下移，更靠屏幕上半部分 */
 }
 
-/* === 时间显示样式 - 显示当前时间的大字体 === */
+/* === 时间显示 - 调整大小和间距 === */
 .time-display {
-    font-size: 4em;                     /* 字体大小为4em，相对于父元素字体大小的4倍 */
-    font-weight: bold;                  /* 字体加粗，更加醒目 */
-    margin-bottom: 5px;                 /* 底部外边距5像素，减少与问候语的间距 */
-    font-family: 'Orbitron', 'Courier New', monospace; /* 字体栈：首选Orbitron科技字体，备用Courier New等宽字体，最后系统等宽字体 */
-    letter-spacing: 2px;                /* 字母间距2像素，让数字之间更加清晰易读 */
+    font-size: clamp(2.5em, 10vw, 4em); /* 响应式字体：最小2.5em，按视口宽度10%计算，最大4em */
+    font-weight: bold;                  /* 字体加粗 */
+    margin-bottom: 1vh;                 /* 底部外边距：视口高度的1%，减少与问候语的间距（原为5px） */
+    font-family: 'Orbitron', monospace; /* 科技感字体 */
+    letter-spacing: 2px;                /* 字母间距2像素 */
 }
 
-/* === 问候语样式 - 根据时间段显示不同的问候语 === */
+/* === 问候语 - 调整间距 === */
 .greeting {
-    font-size: 2em;                     /* 字体大小为2em，相对于父元素字体大小的2倍 */
-    margin-bottom: 30px;                /* 底部外边距30像素，与搜索框保持适当距离 */
-    margin-top: -5px;                   /* 顶部外边距-5像素（负值），让问候语向上移动靠近时间显示 */
-    font-family: system-ui;             /* 使用系统默认UI字体，会自动跟随用户系统字体设置变化 */
-    font-weight: normal;                /* 正常字重，不使用加粗效果 */
-    -webkit-font-smoothing: antialiased; /* 在Webkit浏览器（Chrome、Safari）中启用字体抗锯齿渲染 */
-    -moz-osx-font-smoothing: grayscale; /* 在Firefox浏览器中启用字体灰度抗锯齿 */
+    font-size: clamp(1.8em, 6vw, 2.5em); /* 响应式字体：最小1.8em，按视口宽度6%计算，最大2.5em */
+    margin-bottom: 4vh;                  /* 底部外边距：视口高度的4%，与搜索框保持适当距离 */
+    margin-top: -5px;                    /* 顶部外边距：负5像素，让问候语向上微调靠近时间显示 */
+    font-family: system-ui;              /* 使用系统默认UI字体 */
+    font-weight: normal;                 /* 正常字重 */
 }
 
-/* === 搜索容器样式 - 包含搜索框和搜索按钮的容器 === */
+/* === 搜索容器 - 减少底部间距 === */
 .search-container {
-    position: relative;                  /* 相对定位，作为内部绝对定位元素的参考 */
+    position: relative;                  /* 相对定位，为内部搜索按钮定位做准备 */
     max-width: 400px;                   /* 最大宽度400像素，避免在大屏幕上过宽 */
     width: 100%;                        /* 宽度100%自适应父容器 */
-    margin-bottom: 40px;                /* 底部外边距40像素，与下方内容保持距离 */
+    margin-bottom: 8vh;                  /* 底部外边距：视口高度的8%，减少与底部应用图标的间距（原为40px） */
+}
 }
 
 /* === 搜索框输入区域样式 - 半透明毛玻璃效果 === */
